@@ -20,14 +20,14 @@ const geocode = (adresse, callback)=>{
 }
 
 const forecast = (x,y, callback)=>{
-    const url='https://api.darksky.net/forecast/bfaca6efc16f269a4b71a0bfdd18772e/'+ x +','+ y +'?units=si&lang=fr'
+    const url='https://api.darksky.net/forecast/bfaca6efc16f269a4b71a0bfdd18772e/'+ x +','+ y +'?units=si'
     request ({ url, json: true},(error,{body})=>{
         if(error){
             callback('Unable to connect to weather sevices!', undefined)
         }else if(body.error){
             callback('Unable to find location!',undefined)
         }else{
-            callback(undefined, body.daily.data[0].summary+' it is currently '+ body.currently.temperature  +' degree out. there is a '+body.currently.precipProbability+'% chance of rain')
+            callback(undefined, body.daily.data[0].summary +' it is currently '+ body.currently.temperature  +'°C. there is a '+body.currently.precipProbability+'% chance of rain. humidity level for today: '+ body.daily.data[0].humidity+'. Maximum temperature for today is : '+body.daily.data[0].temperatureMax+'°C. Minimum temperature for today is : '+body.daily.data[0].temperatureMin+'°C')
         }
     })
 }
